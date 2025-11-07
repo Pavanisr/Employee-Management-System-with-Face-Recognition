@@ -1,0 +1,168 @@
+/* Category.css */
+
+/* ---------- Page Container ---------- */
+.category-container {
+  background: linear-gradient(135deg, #121212, #1e1e1e);
+  min-height: 100vh;
+  color: #f8f9fa;
+  font-family: "Poppins", sans-serif;
+  border-radius: 10px;
+  padding-bottom: 30px;
+}
+
+/* ---------- Title ---------- */
+.category-title {
+  color: #ff9800;
+  font-weight: 600;
+  text-shadow: 0 0 10px rgba(255, 152, 0, 0.6);
+}
+
+/* ---------- Add Button ---------- */
+.add-btn {
+  background: linear-gradient(135deg, #ff9800, #ff6f00);
+  border: none;
+  color: #fff !important;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: 0.3s ease;
+  box-shadow: 0 0 8px rgba(255, 152, 0, 0.5);
+}
+
+.add-btn:hover {
+  background: linear-gradient(135deg, #ffb74d, #ff9800);
+  box-shadow: 0 0 15px rgba(255, 152, 0, 0.7);
+}
+
+/* ---------- Table ---------- */
+.category-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #1a1a1a;
+  color: #fff;
+}
+
+.category-table thead {
+  background: linear-gradient(90deg, #ff9800, #ff6f00);
+  color: #000;
+  font-weight: 600;
+  text-align: center;
+}
+
+.category-table th,
+.category-table td {
+  padding: 14px;
+  border: 1px solid #333;
+}
+
+.category-table tbody tr {
+  transition: all 0.2s ease-in-out;
+}
+
+.category-table tbody tr:hover {
+  background-color: #2a2a2a;
+  transform: scale(1.01);
+}
+
+/* ---------- Empty Message ---------- */
+.category-table td[colspan="2"] {
+  color: #aaa;
+  font-style: italic;
+}
+
+/* ------------------- Popup Window Theme ------------------- */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 15, 15, 0.8);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.popup-card {
+  background: linear-gradient(145deg, #1a1a1a, #2a2a2a);
+  color: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 400px;
+  box-shadow: 0 0 25px rgba(255, 153, 0, 0.4);
+  animation: popupFade 0.3s ease-in-out;
+}
+
+.popup-title {
+  text-align: center;
+  color: #ff9800;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 0 10px rgba(255, 152, 0, 0.6);
+}
+
+/* Input Field */
+.popup-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ff9800;
+  border-radius: 6px;
+  background: #121212;
+  color: #fff;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.popup-input:focus {
+  border-color: #ffa726;
+  box-shadow: 0 0 8px rgba(255, 152, 0, 0.5);
+}
+
+/* Buttons */
+.popup-btn {
+  background: linear-gradient(135deg, #ff9800, #ff6f00);
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  font-weight: 600;
+  border-radius: 6px;
+  width: 48%;
+  transition: 0.3s ease;
+}
+
+.popup-btn:hover {
+  background: linear-gradient(135deg, #ffb74d, #ff9800);
+  box-shadow: 0 0 10px rgba(255, 152, 0, 0.6);
+}
+
+.popup-cancel {
+  background: #333;
+  color: #fff;
+  border: 1px solid #555;
+  border-radius: 6px;
+  width: 48%;
+  font-weight: 600;
+  transition: 0.3s ease;
+}
+
+.popup-cancel:hover {
+  background: #ff6f00;
+  border-color: #ff9800;
+  color: #fff;
+}
+
+/* Animation */
+@keyframes popupFade {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

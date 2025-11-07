@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Attendance Dashboard</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <style>
+    .thumb {
+      width: 100px;
+      margin-right: 10px;
+      vertical-align: middle;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    #statusBox {
+      font-weight: bold;
+      color: #007bff;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Face Recognition Attendance</h1>
+    <p>Use webcam to capture a photo and mark attendance.</p>
+
+    <video id="video" width="640" height="480" autoplay></video>
+    <br>
+    <button id="snap">Capture & Mark Attendance</button>
+    <p id="result"></p>
+    <p id="statusBox"></p>
+
+    <h3>Or upload an image</h3>
+    <form id="uploadForm" enctype="multipart/form-data">
+      <input type="file" name="imagefile" accept="image/*" required>
+      <button type="submit">Upload & Recognize</button>
+    </form>
+
+    <hr>
+    <a href="/reports">View Reports</a> | <a href="/export_csv">Export CSV</a>
+  </div>
+
+<script>
+const video = document.getElementById('video');
+const snapBtn = document.getElementById('snap');
+const resultP = document.getElementById('result');
+const statusBox = document.getElementById('statusBox');
+
+// ✅ Access webcam
+navigator.mediaDevices.getUserMedia({ video: true })
+  .then(stream => { video.srcObject = stream; })
+  .catch(err => { 
+    console.error(err); 
+    resultP.innerText = 'Unable to access webcam'; 
+  });
+
+// ✅ Capture frame and send to /recognize
+snapBtn.onclick = async () => {
+  const canvas = document.createElement('canvas');
+  canvas.width = video.videoWidth || 640;
+  canvas.height = video.videoHeight || 480;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+  const dataUrl = canvas.toDataURL('image/jpeg');
+
+  resultP.innerText = '';
+  statusBox.innerText = 'Recognizing...';
+
+  const resp = await fetch('/api/recognize', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ image_base64: dataUrl })
+  });
+
+  const data = await resp.json();
+
+  // Display messages from backend progress
+  if (data.progress) {
+    statusBox.innerHTML = data.progress.join('<br>');
+  } else {
+    statusBox.innerText = data.message || JSON.stringify(data);
+  }
+
+  // Show thumbnail if backend returns it
+  if (data.employee_image_url) {
+    resultP.innerHTML = `<img src="${data.employee_image_url}" class="thumb"> ${data.message}`;
+  } else {
+    resultP.innerText = data.message || '';
+  }
+};
+
+// ✅ Handle file upload
+const form = document.getElementById('uploadForm');
+form.onsubmit = async (e) => {
+  e.preventDefault();
+  const fd = new FormData(form);
+  resultP.innerText = '';
+  statusBox.innerText = 'Uploading...';
+
+  const resp = await fetch('/api/recognize', { method: 'POST', body: fd });
+  const data = await resp.json();
+
+  if (data.progress) {
+    statusBox.innerHTML = data.progress.join('<br>');
+  } else {
+    statusBox.innerText = data.message || JSON.stringify(data);
+  }
+
+  if (data.employee_image_url) {
+    resultP.innerHTML = `<img src="${data.employee_image_url}" class="thumb"> ${data.message}`;
+  } else {
+    resultP.innerText = data.message || '';
+  }
+};
+</script>
+</body>
+</html>

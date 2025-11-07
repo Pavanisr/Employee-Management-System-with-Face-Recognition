@@ -1,0 +1,376 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@400;500&display=swap');
+
+
+
+/* ---------------- Main Wrapper ---------------- */
+:root{
+  --bg-dark: #0b0b0b;
+  --panel-dark: #111214;
+  --muted: #bdbdbd;
+  --accent: #ff6600;
+  --accent-2: #ff8a33;
+  --card: #1b1b1d;
+  --glass: rgba(255,255,255,0.03);
+}
+
+*{box-sizing:border-box}
+body,html,#root { height: 100%; margin: 0; font-family: "Poppins", sans-serif; background: var(--bg-dark); color: #fff; }
+
+/* Outer container split left/right */
+.ae-wrapper {
+  display: flex;
+  gap: 0;
+  min-height: 100vh;
+  align-items: stretch;
+}
+
+/* ---------------- LEFT ORANGE PANEL ---------------- */
+.ae-left {
+  flex: 1.05;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-right: 1px solid rgba(0,0,0,0.25);
+  position: relative;
+  overflow: hidden;
+}
+
+/* logo top-left */
+.ae-left-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.ae-logo {
+  width: 92px;
+  height: 44px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  padding: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+}
+
+/* center area for decorative image / sample */
+.ae-left-content{
+  flex: 1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 10px;
+}
+.ae-sample-image img{
+  max-width: 90%;
+  max-height: 60vh;
+  border-radius: 18px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+  object-fit: cover;
+}
+
+/* footer */
+.ae-left-footer{
+  text-align:center;
+  color: rgba(0,0,0,0.6);
+  font-weight:600;
+}
+
+/* ---------------- RIGHT FORM PANEL ---------------- */
+.ae-right {
+  flex: 1;
+  background: linear-gradient(180deg, #0e0e10, #131314);
+  padding: 36px 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  justify-content: flex-start;
+}
+
+/* Title & messages */
+.ae-title {
+  color: var(--accent);
+  font-size: 1.4rem;
+  margin: 0 0 6px 0;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.ae-error {
+  background: rgba(255, 70, 70, 0.12);
+  color: #ffb7b7;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,70,70,0.14);
+}
+
+.ae-success {
+  background: rgba(0,200,100,0.06);
+  color: #bff0c9;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,200,100,0.08);
+}
+
+/* Grid: left = form, right = camera */
+.ae-content-grid {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 28px;
+  margin-top: 12px;
+  align-items: start;
+}
+
+/* ------------- FORM ------------- */
+.ae-form {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.03);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.form-row.single { display:block; }
+
+.form-field {
+  flex: 1;
+  display:flex;
+  flex-direction:column;
+}
+
+.form-field label {
+  font-size: 0.78rem;
+  color: #d9b48a;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.ae-form input[type="text"],
+.ae-form input[type="email"],
+.ae-form input[type="password"],
+.ae-form input[type="file"],
+.ae-form select {
+  background: var(--card);
+  border: 1px solid rgba(255,255,255,0.04);
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 0.92rem;
+  outline: none;
+  transition: box-shadow 0.18s, border-color 0.18s;
+}
+
+.ae-form input:focus, .ae-form select:focus {
+  box-shadow: 0 6px 20px rgba(255,102,0,0.08);
+  border-color: var(--accent);
+}
+
+/* preview image */
+.preview-img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 8px;
+  border: 2px solid rgba(255,255,255,0.04);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+}
+
+/* action button */
+.form-actions {
+  display:flex;
+  justify-content:flex-start;
+  margin-top: 6px;
+}
+
+.btn-submit {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  border: none;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(255,102,0,0.12);
+}
+
+/* ------------- CAMERA CARD ------------- */
+.ae-camera-column {
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+}
+
+.camera-card {
+  width: 100%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.03);
+  padding: 14px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.65);
+}
+
+/* header */
+.camera-header {
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  margin-bottom: 12px;
+}
+.camera-title { color:#fff; font-weight:700; }
+.camera-sub { color: #bdbdbd; font-size: 0.85rem; }
+
+/* camera frame mimicking meeting app */
+.camera-body {
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  align-items:center;
+}
+
+.camera-frame {
+  width: 100%;
+  height: 0;
+  padding-bottom: 75%; /* 4:3 ratio box */
+  position: relative;
+  border-radius: 14px;
+  background: linear-gradient(180deg,#2a2a2b,#232324);
+  overflow: hidden;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.02), 0 8px 30px rgba(0,0,0,0.6);
+  border: 1px solid rgba(255,255,255,0.03);
+}
+
+/* place video inside frame */
+.camera-frame video {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% + 40px); /* slightly larger to cover */
+  height: auto;
+  max-height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+  background: #000;
+}
+
+/* Controls */
+.camera-controls {
+  width: 100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap: 10px;
+}
+
+.btn-orange-outline {
+  background: transparent;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* capture/done buttons row */
+.camera-btns {
+  display:flex;
+  gap: 10px;
+  align-items:center;
+}
+
+/* main capture button - big orange */
+.btn-capture {
+  background: var(--accent);
+  border: none;
+  color: #111;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 0 8px 30px rgba(255,102,0,0.12);
+}
+
+/* done button - subtle */
+.btn-done {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.06);
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* capture info text */
+.capture-info p {
+  margin: 0;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* footer hint */
+.camera-footer { margin-top:8px; text-align:center; color:#9d9d9d; font-size:0.82rem; }
+
+/* ---------------- Responsive ---------------- */
+@media (max-width: 1000px) {
+  .ae-content-grid { grid-template-columns: 1fr; }
+  .ae-left { display:none; } /* hide left panel on smaller screens */
+  .ae-wrapper { min-height: auto; }
+  .ae-right { padding: 18px; }
+  .camera-frame { padding-bottom: 66%; } /* a bit taller on mobile */
+}
+
+.ae-reg-image {
+  max-width: 95%;
+  max-height: 70vh;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+/* ---------------- WELCOME TEXT ---------------- */
+.ae-welcome-text {
+  text-align: center;
+  color: #fff;
+  margin-bottom: 24px;
+  font-family: "Playfair Display", serif; /* elegant font */
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 1s ease-in-out;
+}
+
+.ae-welcome-text h1 {
+  font-size: 1.8rem;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.ae-welcome-text p {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin-top: 6px;
+  font-family: "Poppins", sans-serif;
+  letter-spacing: 0.4px;
+}
+
+/* simple fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

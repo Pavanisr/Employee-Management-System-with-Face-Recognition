@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Face Recognition Attendance</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Helvetica', sans-serif;
+      background: linear-gradient(to bottom, #1e3c72, #2a5298);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 30px;
+      width: 360px;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+      backdrop-filter: blur(10px);
+    }
+    h1 {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+    video {
+      border-radius: 20px;
+      width: 100%;
+      height: auto;
+      margin-bottom: 15px;
+      border: 2px solid #4cd137;
+    }
+    #snap {
+      background-color: #4cd137;
+      border: none;
+      padding: 12px 20px;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-bottom: 15px;
+      transition: 0.3s;
+    }
+    #snap:hover {
+      background-color: #44bd32;
+    }
+    #result {
+      margin-top: 10px;
+      font-size: 16px;
+      min-height: 24px;
+    }
+    hr {
+      margin: 20px 0;
+      border: 0.5px solid rgba(255,255,255,0.3);
+    }
+    a {
+      color: #00a8ff;
+      text-decoration: none;
+      margin: 0 5px;
+      font-weight: bold;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Face Recognition Attendance</h1>
+
+    <video id="video" autoplay></video>
+    <button id="snap">Capture & Mark Attendance</button>
+    <p id="result"></p>
+
+    <hr>
+   
+   
+  </div>
+
+<script>
+const video = document.getElementById('video');
+const snapBtn = document.getElementById('snap');
+const resultP = document.getElementById('result');
+
+// Access webcam
+navigator.mediaDevices.getUserMedia({ video: true })
+  .then(stream => { video.srcObject = stream; })
+  .catch(err => { console.error(err); resultP.innerText = 'Unable to access webcam'; });
+
+// Capture frame and send to backend
+snapBtn.onclick = async () => {
+  const canvas = document.createElement('canvas');
+  canvas.width = video.videoWidth || 640;
+  canvas.height = video.videoHeight || 480;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+  const dataUrl = canvas.toDataURL('image/jpeg');
+
+  resultP.innerText = 'Recognizing...';
+  const resp = await fetch('/api/recognize', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ image_base64: dataUrl })
+  });
+
+  const data = await resp.json();
+  resultP.innerText = data.message || JSON.stringify(data);
+};
+</script>
+</body>
+</html>

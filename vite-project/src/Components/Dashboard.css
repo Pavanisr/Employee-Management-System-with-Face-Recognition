@@ -1,0 +1,108 @@
+/* Dashboard.css */
+
+/* ---------- Overall Layout ---------- */
+.dashboard-container {
+  background: linear-gradient(135deg, #111111, #1e1e1e);
+  min-height: 100vh;
+  color: #f8f9fa;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  background: linear-gradient(180deg, #202020, #292929);
+  color: #ffffff;
+  border-right: 2px solid #ff9800;
+}
+
+.sidebar .nav-link {
+  color: #bbbbbb !important;
+  transition: 0.3s ease;
+  font-weight: 500;
+}
+
+.sidebar .nav-link:hover {
+  color: #ff9800 !important;
+  transform: translateX(6px);
+}
+
+.logout-btn {
+  color: #ff5555 !important;
+  transition: 0.3s ease;
+}
+
+.logout-btn:hover {
+  color: #ff2222 !important;
+}
+
+/* ---------- Header ---------- */
+.header {
+  background: linear-gradient(90deg, #ff9800, #ffb74d);
+  color: #1a1a1a;
+  font-weight: 600;
+  border-bottom: 3px solid #222;
+}
+
+/* ---------- Count Cards ---------- */
+.stat-card {
+  color: #fff !important;
+  border-radius: 20px;
+  padding: 30px 10px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  text-align: center;
+  min-height: 170px;
+  margin-right: 2px;
+  
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(255, 152, 0, 0.5);
+}
+
+.bg-orange {
+  background: linear-gradient(135deg, #ff9800, #ffb84d) !important;
+}
+
+.bg-dark-orange {
+  background: linear-gradient(135deg, #ff6f00, #ff9800) !important;
+}
+
+.bg-black-orange {
+  background: linear-gradient(135deg, #332200, #ff6f00) !important;
+}
+
+/* ---------- Admin Table ---------- */
+.admin-table-container {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 25px;
+  border-radius: 12px;
+}
+
+.table-dark {
+  background-color: #121212 !important;
+  border-radius: 10px;
+}
+
+.table-dark thead {
+  background-color: #ff9800 !important;
+  color: #000 !important;
+  font-weight: 600;
+}
+
+.table-dark tbody tr {
+  background-color: #1e1e1e !important;
+  color: #f8f9fa !important;
+}
+
+.table-dark tbody tr:hover {
+  background-color: #2a2a2a !important;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 768px) {
+  .stat-card {
+    margin-bottom: 15px;
+  }
+}
