@@ -83,10 +83,10 @@ const AttendanceDashboard = () => {
 
       {/* Summary Cards */}
       <div className="summary-cards">
-        <SummaryCard icon="👥" label="Employees" value={stats.employees} />
-        <SummaryCard icon="✅" label="Present" value={stats.present} />
-        <SummaryCard icon="❌" label="Absent" value={stats.absent} />
-        <SummaryCard icon="⏰" label="Late Comers" value={stats.late} />
+        <SummaryCard icon="" label="Employees" value={stats.employees} />
+        <SummaryCard icon="" label="Present" value={stats.present} />
+        <SummaryCard icon="" label="Absent" value={stats.absent} />
+        <SummaryCard icon="" label="Late Comers" value={stats.late} />
       </div>
 
       {/* Charts Section */}
